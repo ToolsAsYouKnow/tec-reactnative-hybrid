@@ -71,7 +71,7 @@ class HostPage extends Component {
 	render() {
 		return (
 			<View style={{flex:1}}>
-				<MyToolBar title={_route.message}/>
+				<MyToolBar title={_route.id}/>
 				<View style={HostPageStyles.host_summary_view}>
 					<Text style={[HostPageStyles.host_summary_text, {color:'red'}]}>
 						Total Host Num: {this.state.hostNum}

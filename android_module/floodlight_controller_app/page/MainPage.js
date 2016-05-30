@@ -24,6 +24,7 @@ import MyStatusBar from '../common/widget/CommonStatusBar';
 // Sub page
 import ControllerPage from './controller/ControllerPage';
 import SwitchPage from './switch/SwitchPage';
+import SwitchInfoPage from './switch/SwtichInfoPage';
 import HostPage from './host/HostPage';
 import TopoPage from './topo/TopoPage';
 import SettingPage from './other/SettingPage';
@@ -31,7 +32,7 @@ import AboutPage from './other/AboutPage';
 
 const DRAWER_WEIGHT = 250;
 
-var drawer_menu_tittle_text = [
+global.drawer_menu_tittle_text = [
 	'Controller',
 	'Switches',
 	'Hosts',
@@ -89,9 +90,8 @@ class DrawerDemo extends Component {
 				<MyStatusBar/>
 				<Navigator
 					style={MainPageStyle.container}
-					initialRoute={{id: 1, message: drawer_menu_tittle_text[1]}}
+					initialRoute={{id: drawer_menu_tittle_text[1]}}
 					renderScene={this._routeMapping.bind(this)}
-					configureScene={()=>{return(Navigator.SceneConfigs.FadeAndroid)}}
 				/>
 			</DrawerLayoutAndroid>
 
@@ -114,39 +114,38 @@ class DrawerDemo extends Component {
 
 	_onPressDrawerMenuItem(number) {
 		this.drawer.closeDrawer();
-		_navigator.resetTo({id: number, message: drawer_menu_tittle_text[number]});
+		_navigator.resetTo({id: drawer_menu_tittle_text[number]});
 	}
 
 	_routeMapping(route, navigationOperations, onComponentRef) {
 		_navigator = navigationOperations;
 		// Controller sub page
-		if (route.id === 0) {
+		if (route.id === drawer_menu_tittle_text[0]) {
 			return <ControllerPage navigator={navigationOperations} route={route}/>;
 		}
 		// Switch sub page
-		if (route.id === 1) {
+		if (route.id === drawer_menu_tittle_text[1]) {
 			return <SwitchPage navigator={navigationOperations} route={route}/>;
 		}
+		// Switch Info page
+		if (route.id === 'Switch Info') {
+			return <SwitchInfoPage navigator={navigationOperations} route={route}/>;
+		}
 		// Host sub page
-		if (route.id === 2) {
+		if (route.id === drawer_menu_tittle_text[2]) {
 			return <HostPage navigator={navigationOperations} route={route}/>;
 		}
 		// Topo sub page
-		if (route.id === 3) {
+		if (route.id === drawer_menu_tittle_text[3]) {
 			return <TopoPage navigator={navigationOperations} route={route}/>;
 		}
 		// Setting page
-		if (route.id === 5) {
+		if (route.id === drawer_menu_tittle_text[5]) {
 			return <SettingPage navigator={navigationOperations} route={route}/>;
 		}
 		// About page
-		if (route.id === 6) {
+		if (route.id === drawer_menu_tittle_text[6]) {
 			return <AboutPage navigator={navigationOperations} route={route}/>;
-		}
-
-		// Exit
-		if (route.id === 7) {
-			return <Text>Exit</Text>
 		}
 	}
 

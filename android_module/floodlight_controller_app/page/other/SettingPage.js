@@ -32,7 +32,7 @@ class SettingPage extends Component {
 	render() {
 		return (
 			<View>
-				<MyToolBar title={_route.message}/>
+				<MyToolBar title={_route.id}/>
 				<View style={{alignItems: 'center', padding: 100}}>
 					<Text>Sub Page</Text>
 					<Text>{_route.message}</Text>

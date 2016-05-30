@@ -43,38 +43,62 @@ class SwitchPage extends Component {
 	}
 
 	componentDidMount() {
-		this.getSwitchInfo();
+		this.getSwitchInfo(true);
 	}
 
-	getSwitchInfo() {
-		fetch(URL.HOST_URL + URL.SWITCHES_INFO)
-			.then((response) => response.json())
-			.then((responseJson)=> {
-				console.log(responseJson);
+	getSwitchInfo(isFake) {
+		if (!isFake) {
+			fetch(URL.HOST_URL + URL.SWITCHES_INFO)
+				.then((response) => response.json())
+				.then((responseJson)=> {
+					console.log(responseJson);
 
-				var switchList = [];
-				var count = 0;
-				for (var switchId in responseJson) {
-					switchList[count] = new Object();
-					switchList[count].switchId = switchId;
-					switchList[count].aggregate = responseJson[switchId]['aggregate'];
-					count++;
-				}
-				console.log(switchList);
+					var switchList = [];
+					var count = 0;
+					for (var switchId in responseJson) {
+						switchList[count] = new Object();
+						switchList[count].switchId = switchId;
+						switchList[count].aggregate = responseJson[switchId]['aggregate'];
+						count++;
+					}
+					console.log(switchList);
 
-				this.setState({
-					isLoaded: true,
-					switchNum: switchList.length,
-					dataSource: this.state.dataSource.cloneWithRows(switchList)
-				})
-			}).done();
+					this.setState({
+						isLoaded: true,
+						switchNum: switchList.length,
+						dataSource: this.state.dataSource.cloneWithRows(switchList)
+					})
+				}).done();
+		} else {
+			var switchList = [];
+			var count = 10;
+			for (var i = 0; i < count; i++) {
+				switchList[i] = new Object();
+				switchList[i].switchId = '00:00:00:00:00:00:00:0' + i;
+				switchList[i].aggregate = new Object();
+				switchList[i].aggregate.version = 'OF_10';
+				switchList[i].aggregate.flowCount = 0;
+				switchList[i].aggregate.packetCount = 0;
+				switchList[i].aggregate.byteCount = 0;
+				switchList[i].aggregate.flags = 0;
+			}
+			console.log(switchList);
+
+			this.setState({
+				isLoaded: true,
+				switchNum: switchList.length,
+				dataSource: this.state.dataSource.cloneWithRows(switchList)
+			})
+		}
+
+
 	}
 
 	render() {
 		if (!this.state.isLoaded) {
 			return (
 				<View>
-					<MyToolBar title={_route.message}/>
+					<MyToolBar title={_route.id}/>
 					<View style={SwitchPageStyles.switch_summary_view}>
 						<Text style={[SwitchPageStyles.switch_summary_text, {color:'green'}]}>
 							Total Switch Num: {this.state.switchNum}
@@ -86,7 +110,7 @@ class SwitchPage extends Component {
 		} else {
 			return (
 				<View style={{flex:1}}>
-					<MyToolBar title={_route.message}/>
+					<MyToolBar title={_route.id}/>
 					<View style={SwitchPageStyles.switch_summary_view}>
 						<Text style={[SwitchPageStyles.switch_summary_text, {color:'green'}]}>
 							Total Switch Num: {this.state.switchNum}
@@ -104,7 +128,10 @@ class SwitchPage extends Component {
 
 	renderSwitch(switchJson) {
 		return (
-			<TouchableOpacity style={SwitchPageStyles.switch_item_wrapper}>
+			<TouchableOpacity
+				style={SwitchPageStyles.switch_item_wrapper}
+				onPress={this.switchItemOnPress.bind(this,switchJson.switchId)}
+			>
 				<View style={{flexDirection: 'row'}}>
 					<Text style={[SwitchPageStyles.switch_item_text,{flex:3}]}>
 						{switchJson.switchId}
@@ -129,6 +156,11 @@ class SwitchPage extends Component {
 				</View>
 			</TouchableOpacity>
 		);
+	}
+
+	switchItemOnPress(switchId) {
+		console.log(switchId);
+		_navigator.push({id: 'Switch Info', switchId: switchId});
 	}
 }
 

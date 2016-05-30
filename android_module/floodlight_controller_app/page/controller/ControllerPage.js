@@ -117,7 +117,7 @@ class ControllerPage extends Component {
 	render() {
 		return (
 			<View>
-				<MyToolBar title={_route.message}/>
+				<MyToolBar title={_route.id}/>
 				<ScrollView
 					style={ControllerPageStyles.verticalScrollView}
 					showsVerticalScrollIndicator={true}>

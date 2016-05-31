@@ -2,7 +2,7 @@
 
 
 // IP and Port
-export const HOST_IP = '192.168.1.89';
+export const HOST_IP = '192.168.1.110';
 export const HOST_PORT = '8080';
 export const HOST_URL = 'http://' + HOST_IP + ':' + HOST_PORT;
 
@@ -29,6 +29,12 @@ export const SWITCHES_LIST = WM + CORE + '/switch/all/aggregate/json';
 // Get Switch Description
 export const SWITCHES_DESC_1 = WM + CORE + '/switch/';
 export const SWITCHES_DESC_2 = '/desc/json';
+// Switch Ports Info
+export const SWITCHES_PORT_1 = SWITCHES_DESC_1;
+export const SWITCHES_PORT_2 = '/port/json';
+
+export const SWITCHES_FLOW_1 = WM + "/staticflowpusher/list/";
+export const SWITCHES_FLOW_2 = '/json';
 
 //---------------------------------------Host--------------------------------------------
 export const ALL_HOST_INFO = WM + '/device/';

@@ -43,55 +43,32 @@ class SwitchPage extends Component {
 	}
 
 	componentDidMount() {
-		this.getSwitchInfo(true);
+		this.getSwitchInfo();
 	}
 
-	getSwitchInfo(isFake) {
-		if (!isFake) {
-			fetch(URL.HOST_URL + URL.SWITCHES_LIST)
-				.then((response) => response.json())
-				.then((responseJson)=> {
-					console.log(responseJson);
+	getSwitchInfo() {
+		fetch(URL.HOST_URL + URL.SWITCHES_LIST)
+			.then((response) => response.json())
+			.then((responseJson)=> {
+				console.log(responseJson);
 
-					var switchList = [];
-					var count = 0;
-					for (var switchId in responseJson) {
-						switchList[count] = new Object();
-						switchList[count].switchId = switchId;
-						switchList[count].aggregate = responseJson[switchId]['aggregate'];
-						count++;
-					}
-					console.log(switchList);
+				var switchList = [];
+				var count = 0;
+				for (var _switchId in responseJson) {
+					switchList[count] = {
+						switchId: _switchId,
+						aggregate: responseJson[_switchId]['aggregate']
+					};
+					count++;
+				}
+				console.log(switchList);
 
-					this.setState({
-						isLoaded: true,
-						switchNum: switchList.length,
-						dataSource: this.state.dataSource.cloneWithRows(switchList)
-					})
-				}).done();
-		} else {
-			var switchList = [];
-			var count = 10;
-			for (var i = 0; i < count; i++) {
-				switchList[i] = new Object();
-				switchList[i].switchId = '00:00:00:00:00:00:00:0' + i;
-				switchList[i].aggregate = new Object();
-				switchList[i].aggregate.version = 'OF_10';
-				switchList[i].aggregate.flowCount = 0;
-				switchList[i].aggregate.packetCount = 0;
-				switchList[i].aggregate.byteCount = 0;
-				switchList[i].aggregate.flags = 0;
-			}
-			console.log(switchList);
-
-			this.setState({
-				isLoaded: true,
-				switchNum: switchList.length,
-				dataSource: this.state.dataSource.cloneWithRows(switchList)
-			})
-		}
-
-
+				this.setState({
+					isLoaded: true,
+					switchNum: switchList.length,
+					dataSource: this.state.dataSource.cloneWithRows(switchList)
+				})
+			}).done();
 	}
 
 	render() {

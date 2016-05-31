@@ -92,6 +92,7 @@ class DrawerDemo extends Component {
 					style={MainPageStyle.container}
 					initialRoute={{id: drawer_menu_tittle_text[1]}}
 					renderScene={this._routeMapping.bind(this)}
+					configureScene={()=>{return Navigator.SceneConfigs.FadeAndroid}}
 				/>
 			</DrawerLayoutAndroid>
 

@@ -20,6 +20,7 @@ var StatusBarDemo = require('./android_module/widget_demo/StatusBarDemo');
 var ToolBarDemo = require('./android_module/widget_demo/ToolBarDemo');
 var NavigatorDemo_1 = require('./android_module/widget_demo/navigator_demo/NavigatorDemo');
 var NavigatorDemo_2 = require('./android_module/widget_demo/navigator_demo/index');
+var ToolBarDemo = require('./android_module/widget_demo/ViewPagerDemo');
 
 
 // Floodlight Controller App

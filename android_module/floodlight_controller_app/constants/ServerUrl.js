@@ -23,7 +23,12 @@ export const TOPO_SUMMARY = WM + CORE + '/controller/summary/json';
 
 //---------------------------------------Switch--------------------------------------------
 // Get All Switches Info
-export const SWITCHES_INFO = WM + CORE + '/switch/all/aggregate/json';
+export const SWITCHES_LIST = WM + CORE + '/switch/all/aggregate/json';
+
+//---------------------------------------Switch Info--------------------------------------------
+// Get Switch Description
+export const SWITCHES_DESC_1 = WM + CORE + '/switch/';
+export const SWITCHES_DESC_2 = '/desc/json';
 
 //---------------------------------------Host--------------------------------------------
 export const ALL_HOST_INFO = WM + '/device/';

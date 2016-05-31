@@ -15,6 +15,8 @@ import {
 
 import MyToolBar from '../../common/widget/CommonToolBar';
 
+import * as URL from '../../constants/ServerUrl'
+
 var _navigator;
 var _route;
 
@@ -36,7 +38,7 @@ class SwitchInfoPage extends Component {
 	}
 
 	getSwitchDesc() {
-		fetch(URL.HOST_URL + URL.CONTROLLER_STATE)
+		fetch(URL.HOST_URL + URL.SWITCHES_DESC_1 + _route.switchId + URL.SWITCHES_DESC_2s)
 			.then((response) => response.json())
 			.then((responseJson)=> {
 				this.setState({

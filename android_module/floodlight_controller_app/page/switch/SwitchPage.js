@@ -48,7 +48,7 @@ class SwitchPage extends Component {
 
 	getSwitchInfo(isFake) {
 		if (!isFake) {
-			fetch(URL.HOST_URL + URL.SWITCHES_INFO)
+			fetch(URL.HOST_URL + URL.SWITCHES_LIST)
 				.then((response) => response.json())
 				.then((responseJson)=> {
 					console.log(responseJson);

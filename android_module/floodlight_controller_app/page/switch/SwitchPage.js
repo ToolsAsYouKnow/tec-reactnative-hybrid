@@ -63,6 +63,8 @@ class SwitchPage extends Component {
 				}
 				console.log(switchList);
 
+				storage.save();
+				
 				this.setState({
 					isLoaded: true,
 					switchNum: switchList.length,

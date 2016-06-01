@@ -15,6 +15,8 @@ import {
 
 import MyToolBar from '../../common/widget/CommonToolBar';
 
+import * as URL from '../../constants/ServerUrl'
+
 var _navigator;
 var _route;
 
@@ -27,6 +29,18 @@ class FlowPage extends Component {
 
 		// 初始状态
 		this.state = {};
+	}
+
+	componentDidMount() {
+		this.getSwitchPorts();
+	}
+
+	getSwitchPorts() {
+		fetch(URL.HOST_URL + URL.SWITCHES_PORT_1 + 'all' + URL.SWITCHES_PORT_2)
+			.then((response) => response.json())
+			.then((responseJson)=> {
+				storage.save()
+			}).done();
 	}
 
 	render() {

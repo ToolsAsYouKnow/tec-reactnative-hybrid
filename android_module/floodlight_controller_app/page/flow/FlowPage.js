@@ -18,7 +18,7 @@ import MyToolBar from '../../common/widget/CommonToolBar';
 var _navigator;
 var _route;
 
-class TopoPage extends Component {
+class FlowPage extends Component {
 	// 构造
 	constructor(props) {
 		super(props);
@@ -43,4 +43,4 @@ class TopoPage extends Component {
 	}
 }
 
-module.exports = TopoPage;
+module.exports = FlowPage;

@@ -26,7 +26,7 @@ var _route;
 class InfoCell extends Component {
 	render() {
 		return (
-			<TouchableOpacity style={ControllerPageStyles.itemWrapper}>
+			<TouchableOpacity style={ControllerPageStyles.item_wrapper}>
 				<Text style={ControllerPageStyles.item_tittle}>{this.props.title}</Text>
 				<Text style={[ControllerPageStyles.item_text, this.props.style]}>
 					{this.props.text}

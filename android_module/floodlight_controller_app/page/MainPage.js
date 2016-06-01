@@ -26,7 +26,7 @@ import ControllerPage from './controller/ControllerPage';
 import SwitchPage from './switch/SwitchPage';
 import SwitchInfoPage from './switch/SwtichInfoPage';
 import HostPage from './host/HostPage';
-import TopoPage from './topo/TopoPage';
+import FlowPage from 'flow/FlowPage';
 import SettingPage from './other/SettingPage';
 import AboutPage from './other/AboutPage';
 
@@ -36,7 +36,7 @@ global.drawer_menu_tittle_text = [
 	'Controller',
 	'Switches',
 	'Hosts',
-	'Topo',
+	'Flow',
 	'',
 	'Setting',
 	'About',
@@ -138,7 +138,7 @@ class DrawerDemo extends Component {
 		}
 		// Topo sub page
 		if (route.id === drawer_menu_tittle_text[3]) {
-			return <TopoPage navigator={navigationOperations} route={route}/>;
+			return <FlowPage navigator={navigationOperations} route={route}/>;
 		}
 		// Setting page
 		if (route.id === drawer_menu_tittle_text[5]) {

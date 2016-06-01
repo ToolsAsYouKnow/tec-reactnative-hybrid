@@ -41,10 +41,10 @@ class ScrollViewTest extends React.Component {
 
 	render() {
 		// One of the items is a horizontal scroll view
-		var items = this.makeItems(NUM_ITEMS, styles.itemWrapper);
+		var items = this.makeItems(NUM_ITEMS, styles.item_wrapper);
 		items[10] = (
 			<ScrollView key={'scrollView'} horizontal={true}>
-				{this.makeItems(NUM_ITEMS, [styles.itemWrapper, styles.horizontalItemWrapper])}
+				{this.makeItems(NUM_ITEMS, [styles.item_wrapper, styles.horizontalItemWrapper])}
 			</ScrollView>
 		);
 		items[0] = (

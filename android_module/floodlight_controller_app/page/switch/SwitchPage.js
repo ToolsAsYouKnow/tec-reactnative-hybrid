@@ -106,28 +106,28 @@ class SwitchPage extends Component {
 	renderSwitch(switchJson) {
 		return (
 			<TouchableOpacity
-				style={SwitchPageStyles.switch_item_wrapper}
+				style={SwitchPageStyles.item_wrapper}
 				onPress={this.switchItemOnPress.bind(this,switchJson.switchId)}
 			>
 				<View style={{flexDirection: 'row'}}>
-					<Text style={[SwitchPageStyles.switch_item_text,{flex:3}]}>
+					<Text style={[SwitchPageStyles.item_text,{flex:3}]}>
 						{switchJson.switchId}
 					</Text>
-					<Text style={[SwitchPageStyles.switch_item_text,{flex:1}]}>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
 						{switchJson.aggregate.version}
 					</Text>
 				</View>
 				<View style={{flexDirection: 'row', alignItems: 'center'}}>
-					<Text style={[SwitchPageStyles.switch_item_text,{flex:1}]}>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
 						{switchJson.aggregate.flowCount}
 					</Text>
-					<Text style={[SwitchPageStyles.switch_item_text,{flex:1}]}>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
 						{switchJson.aggregate.packetCount}
 					</Text>
-					<Text style={[SwitchPageStyles.switch_item_text,{flex:1}]}>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
 						{switchJson.aggregate.byteCount}
 					</Text>
-					<Text style={[SwitchPageStyles.switch_item_text,{flex:1}]}>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
 						{switchJson.aggregate.flags}
 					</Text>
 				</View>

@@ -48,8 +48,15 @@ class SwitchInfoPage extends Component {
 			isDescLoaded: false,
 			isPortLoaded: false,
 			isFlowLoaded: false,
+
 			switchDes: {},
-			switchPort: {}
+			portDS: new ListView.DataSource({
+				rowHasChanged: (row1, row2) => row1 !== row2
+			}),
+			flowDS: new ListView.DataSource({
+				rowHasChanged: (row1, row2) => row1 !== row2
+			})
+
 		};
 	}
 
@@ -64,8 +71,8 @@ class SwitchInfoPage extends Component {
 			.then((response) => response.json())
 			.then((responseJson)=> {
 				this.setState({
-					switchDes: responseJson.desc,
-					isDescLoaded: true
+					isDescLoaded: true,
+					switchDes: responseJson.desc
 				})
 			}).done();
 	}
@@ -75,8 +82,8 @@ class SwitchInfoPage extends Component {
 			.then((response) => response.json())
 			.then((responseJson)=> {
 				this.setState({
-					switchPort: responseJson['port_reply'][0],
-					isPortLoaded: true
+					isPortLoaded: true,
+					portDS: this.state.portDS.cloneWithRows(responseJson['port_reply'][0]['port'])
 				})
 			}).done();
 	}
@@ -86,7 +93,8 @@ class SwitchInfoPage extends Component {
 			.then((response) => response.json())
 			.then((responseJson)=> {
 				this.setState({
-					isFlowLoaded: true
+					isFlowLoaded: true,
+					flowDS: this.state.flowDS.cloneWithRows(responseJson)
 				})
 			}).done();
 	}
@@ -99,10 +107,19 @@ class SwitchInfoPage extends Component {
 					<View style={{padding: 20}}>
 						{this.showSwitchDesc()}
 					</View>
-					<View style={{alignItems: 'center', padding: 100}}>
-						<Text>Sub Page</Text>
-						<Text>{_route.switchId}</Text>
-						<Text>{_navigator.getCurrentRoutes().length}</Text>
+					<View style={{padding: 20}}>
+						<ListView
+							style={{padding:10}}
+							dataSource={this.state.portDS}
+							renderRow={(portJson) => this.renderPorts(portJson)}
+						/>
+					</View>
+					<View style={{padding: 20}}>
+						<ListView
+							style={{padding:10}}
+							dataSource={this.state.flowDS}
+							renderRow={(flowJson) => this.renderFlows(flowJson)}
+						/>
 					</View>
 				</ViewPagerAndroid>
 			</View>
@@ -121,19 +138,83 @@ class SwitchInfoPage extends Component {
 			var count = 0;
 			for (var arg in this.state.switchDes) {
 				descItemList[count] =
-					<TouchableOpacity style={SwitchInfoStyles.itemWrapper} key={arg}>
-						<Text style={SwitchInfoStyles.item_tittle}>{arg}</Text>
-						<Text style={SwitchInfoStyles.item_text}>{this.state.switchDes[arg]}</Text>
+					<TouchableOpacity style={SwitchInfoPageStyles.item_wrapper} key={arg}>
+						<Text style={SwitchInfoPageStyles.item_tittle}>{arg}</Text>
+						<Text style={SwitchInfoPageStyles.item_text}>{this.state.switchDes[arg]}</Text>
 					</TouchableOpacity>;
 				count++;
 			}
 			return descItemList;
 		}
 	}
+
+	renderPorts(portJson) {
+		return (
+			<TouchableOpacity
+				style={SwitchPageStyles.item_wrapper}
+				onPress={this.switchItemOnPress.bind(this,portJson.switchId)}
+			>
+				<View style={{flexDirection: 'row'}}>
+					<Text style={[SwitchPageStyles.item_text,{flex:3}]}>
+						{portJson.switchId}
+					</Text>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{portJson.aggregate.version}
+					</Text>
+				</View>
+				<View style={{flexDirection: 'row', alignItems: 'center'}}>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{portJson.aggregate.flowCount}
+					</Text>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{portJson.aggregate.packetCount}
+					</Text>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{portJson.aggregate.byteCount}
+					</Text>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{portJson.aggregate.flags}
+					</Text>
+				</View>
+			</TouchableOpacity>
+		);
+	}
+
+	renderFlows(flowJson) {
+		return (
+			<TouchableOpacity
+				style={SwitchPageStyles.item_wrapper}
+				onPress={this.switchItemOnPress.bind(this,flowJson.switchId)}
+			>
+				<View style={{flexDirection: 'row'}}>
+					<Text style={[SwitchPageStyles.item_text,{flex:3}]}>
+						{flowJson.switchId}
+					</Text>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{flowJson.aggregate.version}
+					</Text>
+				</View>
+				<View style={{flexDirection: 'row', alignItems: 'center'}}>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{flowJson.aggregate.flowCount}
+					</Text>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{flowJson.aggregate.packetCount}
+					</Text>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{flowJson.aggregate.byteCount}
+					</Text>
+					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
+						{flowJson.aggregate.flags}
+					</Text>
+				</View>
+			</TouchableOpacity>
+		);
+	}
 }
 
-var SwitchInfoStyles = StyleSheet.create({
-	itemWrapper: {
+var SwitchInfoPageStyles = StyleSheet.create({
+	item_wrapper: {
 		borderWidth: 3,
 		borderRadius: 5,
 		borderColor: '#0080FF',

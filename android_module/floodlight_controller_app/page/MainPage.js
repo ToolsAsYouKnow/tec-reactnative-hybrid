@@ -90,7 +90,7 @@ class DrawerDemo extends Component {
 				<MyStatusBar/>
 				<Navigator
 					style={MainPageStyle.container}
-					initialRoute={{id: drawer_menu_tittle_text[1]}}
+					initialRoute={{id: drawer_menu_tittle_text[3]}}
 					renderScene={this._routeMapping.bind(this)}
 					configureScene={()=>{return Navigator.SceneConfigs.FadeAndroid}}
 				/>

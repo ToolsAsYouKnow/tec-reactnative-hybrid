@@ -27,6 +27,6 @@ global.storage = new Storage({
 	}
 });
 
-export const PORT_STORAGE_KEY = 'portSave';
-export const SWITCH_STORAGE_KEY = 'portSave';
+global.PORT_STORAGE_KEY = 'portSave';
+global.SWITCH_STORAGE_KEY = 'switchSave';
 

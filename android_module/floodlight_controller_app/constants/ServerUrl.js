@@ -29,12 +29,22 @@ export const SWITCHES_LIST = WM + CORE + '/switch/all/aggregate/json';
 // Get Switch Description
 export const SWITCHES_DESC_1 = WM + CORE + '/switch/';
 export const SWITCHES_DESC_2 = '/desc/json';
-// Switch Ports Info
-export const SWITCHES_PORT_1 = SWITCHES_DESC_1;
-export const SWITCHES_PORT_2 = '/port/json';
 
 export const SWITCHES_FLOW_1 = WM + "/staticflowpusher/list/";
 export const SWITCHES_FLOW_2 = '/json';
 
 //---------------------------------------Host--------------------------------------------
 export const ALL_HOST_INFO = WM + '/device/';
+
+
+//---------------------------------------Flow--------------------------------------------
+// Switch Ports Info
+export const SWITCHES_PORT_1 = SWITCHES_DESC_1;
+export const SWITCHES_PORT_2 = '/port/json';
+
+//http://192.168.191.3:8080/wm/staticflowpusher/json
+export const FLOW = WM + '/staticflowpusher/json';
+
+// http://192.168.191.3:8080/wm/staticflowpusher/clear/all/json
+export const CLEAR_FLOW = WM + '/staticflowpusher/clear/all/json';
+

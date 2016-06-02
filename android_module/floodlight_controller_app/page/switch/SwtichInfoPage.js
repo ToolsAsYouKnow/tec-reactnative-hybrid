@@ -101,6 +101,7 @@ class SwitchInfoPage extends Component {
 							style={{padding:10}}
 							dataSource={this.state.flowDS}
 							renderRow={(flowJson) => this.renderFlows(flowJson)}
+							enableEmptySections={true}
 						/>
 					</View>
 				</ViewPagerAndroid>

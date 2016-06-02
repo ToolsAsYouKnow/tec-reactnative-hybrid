@@ -162,7 +162,7 @@ var ControllerPageStyles = StyleSheet.create({
 	verticalScrollView: {
 		margin: 5
 	},
-	itemWrapper: {
+	item_wrapper: {
 		flex: 1,
 		alignItems: 'center',
 		borderWidth: 3,

@@ -14,10 +14,12 @@ import {
 	BackAndroid,
 	ViewPagerAndroid,
 	StyleSheet,
-	TouchableOpacity
+	TouchableOpacity,
+	ListView
 } from 'react-native';
 
 import MyToolBar from '../../common/widget/CommonToolBar';
+import Progress from '../../common/widget/CommonProgressBar';
 
 import * as URL from '../../constants/ServerUrl'
 
@@ -75,10 +77,13 @@ class SwitchInfoPage extends Component {
 		fetch(URL.HOST_URL + URL.SWITCHES_FLOW_1 + _route.switchId + URL.SWITCHES_FLOW_2)
 			.then((response) => response.json())
 			.then((responseJson)=> {
-				this.setState({
-					isFlowLoaded: true,
-					flowDS: this.state.flowDS.cloneWithRows(responseJson)
-				})
+				let flowsList = responseJson[_route.switchId];
+				if (flowsList) {
+					this.setState({
+						isFlowLoaded: true,
+						flowDS: this.state.flowDS.cloneWithRows(flowsList)
+					})
+				}
 			}).done();
 	}
 
@@ -91,6 +96,7 @@ class SwitchInfoPage extends Component {
 						{this.showSwitchDesc()}
 					</View>
 					<View style={{padding: 20}}>
+						<Text style={[SwitchInfoPageStyles.item_text, {color:'green'}]}> Flow </Text>
 						<ListView
 							style={{padding:10}}
 							dataSource={this.state.flowDS}
@@ -105,10 +111,7 @@ class SwitchInfoPage extends Component {
 
 	showSwitchDesc() {
 		if (!this.state.isDescLoaded) {
-			return (
-				<Text>
-					Loading.....
-				</Text>)
+			return <Progress/>;
 		} else {
 			var descItemList = [];
 			var count = 0;
@@ -125,31 +128,30 @@ class SwitchInfoPage extends Component {
 	}
 
 	renderFlows(flowJson) {
+		var _flowId;
+		var flowInfo = {};
+		for (let flowId in flowJson) {
+			_flowId = flowId;
+			flowInfo = flowJson[flowId];
+		}
 		return (
 			<TouchableOpacity
-				style={SwitchPageStyles.item_wrapper}
-				onPress={this.switchItemOnPress.bind(this,flowJson.switchId)}
+				style={SwitchInfoPageStyles.item_wrapper}
 			>
 				<View style={{flexDirection: 'row'}}>
-					<Text style={[SwitchPageStyles.item_text,{flex:3}]}>
-						{flowJson.switchId}
+					<Text style={[SwitchInfoPageStyles.item_tittle,{flex:3}]}>
+						{_flowId}
 					</Text>
-					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
-						{flowJson.aggregate.version}
+					<Text style={[SwitchInfoPageStyles.item_tittle,{flex:1}]}>
+						{flowInfo.command}
 					</Text>
 				</View>
 				<View style={{flexDirection: 'row', alignItems: 'center'}}>
-					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
-						{flowJson.aggregate.flowCount}
+					<Text style={[SwitchInfoPageStyles.item_tittle,{flex:1}]}>
+						inPort: {flowInfo['match']['in_port']}
 					</Text>
-					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
-						{flowJson.aggregate.packetCount}
-					</Text>
-					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
-						{flowJson.aggregate.byteCount}
-					</Text>
-					<Text style={[SwitchPageStyles.item_text,{flex:1}]}>
-						{flowJson.aggregate.flags}
+					<Text style={[SwitchInfoPageStyles.item_tittle,{flex:1}]}>
+						{flowInfo['actions']['actions']}
 					</Text>
 				</View>
 			</TouchableOpacity>

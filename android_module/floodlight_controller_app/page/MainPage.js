@@ -26,7 +26,7 @@ import ControllerPage from './controller/ControllerPage';
 import SwitchPage from './switch/SwitchPage';
 import SwitchInfoPage from './switch/SwtichInfoPage';
 import HostPage from './host/HostPage';
-import FlowPage from 'flow/FlowPage';
+import FlowPage from './flow/FlowPage';
 import SettingPage from './other/SettingPage';
 import AboutPage from './other/AboutPage';
 

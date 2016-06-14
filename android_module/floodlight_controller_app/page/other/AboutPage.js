@@ -33,10 +33,10 @@ class AboutPage extends Component {
 		return (
 			<View>
 				<MyToolBar title={_route.id}/>
-				<View style={{alignItems: 'center', padding: 100}}>
-					<Text>Sub Page</Text>
-					<Text>{_route.message}</Text>
-					<Text>{_navigator.getCurrentRoutes().length}</Text>
+				<View style={{alignItems: 'center', padding: 50}}>
+					<Text style={{fontSize:50}}>Created by SkyLan</Text>
+					<Text style={{fontSize:20, marginTop:20}}>A SDN Controller APP Based On Floodlight</Text>
+					<Text style={{fontSize:20, marginTop:20}}>copyright@Skylan.c.c</Text>
 				</View>
 			</View>
 		)

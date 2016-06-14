@@ -2,7 +2,7 @@
 
 
 // IP and Port
-export const HOST_IP = '192.168.191.3';
+export const HOST_IP = '192.168.191.4';
 export const HOST_PORT = '8080';
 export const HOST_URL = 'http://' + HOST_IP + ':' + HOST_PORT;
 
